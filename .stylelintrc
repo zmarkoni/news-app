@@ -1,0 +1,23 @@
+{
+  "extends": [
+      "stylelint-config-standard",
+      "stylelint-prettier/recommended"
+  ],
+  "ignoreFiles": ['**/*.js', '**/node_modules/**'],
+  "plugins": [
+    "stylelint-no-unsupported-browser-features",
+    "stylelint-prettier"
+  ],
+  "rules": {
+    "prettier/prettier": true,
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["extends", "ignores"]
+      }
+    ],
+    "indentation": "tab",
+    "number-leading-zero": null,
+    "unit-whitelist": ["em", "rem", "s"]
+  }
+}

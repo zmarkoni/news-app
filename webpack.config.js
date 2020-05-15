@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -23,15 +24,16 @@ module.exports = {
                 test: /\.js$/,
                 loader: ['babel-loader'],
                 exclude: '/node_modules/'
-            }, 
+            },
             {
                 test: /\.(sa|sc|c)ss$/,
                 exclude: '/node_modules/',
                 use: [
                     { loader: 'style-loader' },
-                    { loader: 'css-loader'},
-                    {loader: 'sass-loader'},
-                    { loader: 'postcss-loader',
+                    { loader: 'css-loader' },
+                    { loader: 'sass-loader' },
+                    {
+                        loader: 'postcss-loader',
                         options: {
                             indent: 'postcss',
                             plugins: () => [autoprefixer()]
@@ -47,6 +49,10 @@ module.exports = {
             filename: 'index.html',
             inject: 'body',
 
+        }),
+        new StylelintPlugin({
+            configFile: __dirname + '/.stylelintrc',
+            files: '**/*.(sa|sc|c)ss'
         })
     ]
 };
