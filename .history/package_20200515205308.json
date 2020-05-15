@@ -1,0 +1,19 @@
+{
+  "name": "news-app",
+  "version": "1.0.0",
+  "description": "test-zoran-markovic",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zmarkoni/news-app.git"
+  },
+  "author": "Zoran Markovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zmarkoni/news-app/issues"
+  },
+  "homepage": "https://github.com/zmarkoni/news-app#readme"
+}
