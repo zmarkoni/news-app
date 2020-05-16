@@ -1,5 +1,16 @@
-.news {
-	h1 {
-		color: red;
+@import './containers/Layout';
+@import './components/Loader/Loader';
+@import './components/Nav/Navigation';
+@import './components/ListArticles/ListArticles';
+@import './components/ListCategories/ListCategories';
+@import './components/Article/Article';
+
+#news {
+	box-sizing: border-box;
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: inherit;
 	}
 }

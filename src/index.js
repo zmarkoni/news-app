@@ -7,10 +7,12 @@ import ReduxThunk from 'redux-thunk';
 import './index.scss';
 import App from './App';
 
-import newsReducer from './store/reducers/topHeadlines';
+import topHeadlinesReducer from './store/reducers/topHeadlines';
+import sourcesReducer from './store/reducers/sources';
 
 const rootReducer = combineReducers({
-	news: newsReducer,
+	topHeadlines: topHeadlinesReducer,
+	sources: sourcesReducer,
 });
 
 // Create Middleware
@@ -36,5 +38,5 @@ ReactDOM.render(
 	<Provider store={store}>
 		<App />
 	</Provider>,
-	document.getElementById('root')
+	document.getElementById('news')
 );
