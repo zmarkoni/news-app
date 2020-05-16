@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'; // We use provide to wrap our React APP to connect it with Redux
 import ReduxThunk from 'redux-thunk';
+import { BrowserRouter } from 'react-router-dom';
 
 import './index.scss';
-import App from './App';
+import App from './app';
 
 import topHeadlinesReducer from './store/reducers/topHeadlines';
 import sourcesReducer from './store/reducers/sources';
@@ -36,7 +37,9 @@ const store = createStore(
 
 ReactDOM.render(
 	<Provider store={store}>
-		<App />
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
 	</Provider>,
 	document.getElementById('news')
 );

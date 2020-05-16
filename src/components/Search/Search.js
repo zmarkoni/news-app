@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Loader = () => {
+const Search = () => {
 	return (
 		<React.Fragment>
-			<div>loader</div>
+			<div>search</div>
 		</React.Fragment>
 	);
 };
 
-export default Loader;
+export default Search;
