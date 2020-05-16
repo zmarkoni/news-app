@@ -8,6 +8,7 @@ module.exports = {
 		'plugin:react-hooks/recommended',
 		'plugin:react/recommended',
 		'plugin:prettier/recommended',
+		'plugin:jsx-a11y/recommended',
 	],
 	globals: {
 		Atomics: 'readonly',
@@ -20,5 +21,5 @@ module.exports = {
 		ecmaVersion: 11,
 		sourceType: 'module',
 	},
-	plugins: ['react', 'react-hooks'],
+	plugins: ['react', 'react-hooks', 'jsx-a11y'],
 };
