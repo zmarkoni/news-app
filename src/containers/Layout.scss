@@ -2,8 +2,8 @@
 	width: 100%;
 
 	@include breakpoint($b-02) {
-		width: 800px;
-		height: 500px;
+		width: 850px;
+		height: 550px;
 		margin: 54px auto;
 		border: 1px solid $c-01;
 	}

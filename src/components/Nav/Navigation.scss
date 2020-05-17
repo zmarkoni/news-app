@@ -12,16 +12,21 @@
 
 	li {
 		display: inline-block;
-		border-right: 1px solid $c-01;
-		padding-left: 30px;
-		padding-right: 30px;
-		background: $c-02;
 	}
 
 	a {
 		display: block;
 		text-decoration: none;
-		color: $c-00;
 		font-size: 18px;
+		color: $c-01;
+		border-right: 1px solid $c-01;
+		padding-left: 30px;
+		padding-right: 30px;
+
+		&:hover,
+		&.is-active {
+			background: $c-02;
+			color: $c-00;
+		}
 	}
 }

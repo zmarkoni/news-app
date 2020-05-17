@@ -1,18 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Navigation = () => {
 	return (
 		<nav role="navigation" className="nav">
 			<ul>
 				<li>
-					<Link to="/top-news">Top News</Link>
+					<NavLink exact={true} activeClassName="is-active" to="/">
+						Top News
+					</NavLink>
 				</li>
 				<li>
-					<Link to="/categories">Categories</Link>
+					<NavLink activeClassName="is-active" to="/categories">
+						Categories
+					</NavLink>
 				</li>
 				<li>
-					<Link to="/search">Search</Link>
+					<NavLink activeClassName="is-active" to="/search">
+						Search
+					</NavLink>
 				</li>
 			</ul>
 		</nav>
