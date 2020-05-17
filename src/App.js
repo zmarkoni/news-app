@@ -13,25 +13,27 @@ const App = (props) => {
 	console.log('App.js props: ', props);
 
 	return (
-		<div className="App">
+		<div className="layout">
 			<Navigation />
-			<Switch>
-				<Route exact path="/">
-					<TopNews />
-				</Route>
-				<Route path="/categories">
-					<Categories />
-				</Route>
-				<Route path="/search">
-					<Search />
-				</Route>
-				<Route path="/top-news">
-					<TopNews />
-				</Route>
-				<Route path="*">
-					<NoMatch />
-				</Route>
-			</Switch>
+			<main role="main" className="main">
+				<Switch>
+					<Route exact path="/">
+						<TopNews />
+					</Route>
+					<Route path="/categories">
+						<Categories />
+					</Route>
+					<Route path="/search">
+						<Search />
+					</Route>
+					<Route path="/top-news">
+						<TopNews />
+					</Route>
+					<Route path="*">
+						<NoMatch />
+					</Route>
+				</Switch>
+			</main>
 		</div>
 	);
 };

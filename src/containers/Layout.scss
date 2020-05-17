@@ -1,1 +1,8 @@
-//
+.layout {
+	width: 100%;
+
+	@include breakpoint($b-02) {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+}
