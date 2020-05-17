@@ -2,7 +2,9 @@
 	width: 100%;
 
 	@include breakpoint($b-02) {
-		max-width: 800px;
-		margin: 0 auto;
+		width: 800px;
+		height: 500px;
+		margin: 54px auto;
+		border: 1px solid $c-01;
 	}
 }
