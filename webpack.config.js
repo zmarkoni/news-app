@@ -41,6 +41,26 @@ module.exports = {
 					},
 				],
 			},
+			{
+				test: /\.(png|jpg?g|gif)$/,
+				loader: 'url-loader?limit=8000&name=images/[name].[ext]',
+			},
+			{
+				test: /\.svg$/,
+				use: ['@svgr/webpack'],
+			},
+			{
+				test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: '[name].[ext]',
+							outputPath: 'fonts/',
+						},
+					},
+				],
+			},
 		],
 	},
 	plugins: [

@@ -5,12 +5,10 @@ import TopNews from './containers/TopNews';
 import Categories from './containers/Categories';
 import Search from './containers/Searching';
 import NoMatch from './components/NoMatch/NoMatch';
-
-//import Layout from './hoc/Layout/Layout';
 import Navigation from './components/Nav/Navigation';
 
-const App = (props) => {
-	console.log('App.js props: ', props);
+const App = () => {
+	//console.log('App.js props: ', props);
 
 	return (
 		<div className="layout">

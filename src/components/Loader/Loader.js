@@ -1,11 +1,12 @@
 import React from 'react';
+import Loader from '../../resources/icons/loader.svg';
 
-const Loader = () => {
+const loader = () => {
 	return (
-		<React.Fragment>
-			<div>loader</div>
-		</React.Fragment>
+		<div className="loader">
+			<Loader className="loader__icon" />
+		</div>
 	);
 };
 
-export default Loader;
+export default loader;

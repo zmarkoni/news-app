@@ -1,9 +1,10 @@
 import React from 'react';
+import Article from '../Article/Article';
 
 const ListArticles = () => {
 	return (
 		<React.Fragment>
-			<div>listArticles</div>
+			<Article />
 		</React.Fragment>
 	);
 };

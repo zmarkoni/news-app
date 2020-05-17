@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Articles = () => {
+const Article = () => {
 	return (
 		<React.Fragment>
-			<div>Articles</div>
+			<div>One Article</div>
 		</React.Fragment>
 	);
 };
 
-export default Articles;
+export default Article;
