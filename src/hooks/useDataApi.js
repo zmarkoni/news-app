@@ -1,12 +1,12 @@
 import { useEffect, useState, useReducer } from 'react';
-import dataFetchReducer from '../store/reducers/dataFetchReducer';
+import dataFetch from '../store/reducers/dataFetch';
 import { http } from '../shared/utility';
 
 const useDataApi = (initialUrl, httpMethod, initialData) => {
 	const [url, setUrl] = useState(initialUrl);
 	const [method, setMethod] = useState(httpMethod);
 
-	const [state, dispatch] = useReducer(dataFetchReducer, {
+	const [state, dispatch] = useReducer(dataFetch, {
 		isLoading: false,
 		isError: false,
 		data: initialData,

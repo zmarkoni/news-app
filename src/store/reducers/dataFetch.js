@@ -1,4 +1,4 @@
-const dataFetchReducer = (state, action) => {
+const dataFetch = (state, action) => {
 	switch (action.type) {
 		case 'FETCH_INIT':
 			return {
@@ -23,5 +23,4 @@ const dataFetchReducer = (state, action) => {
 			throw new Error();
 	}
 };
-
-export default dataFetchReducer;
+export default dataFetch;

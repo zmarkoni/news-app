@@ -3,8 +3,76 @@
 
 	@include breakpoint($b-02) {
 		width: 850px;
-		height: 550px;
+		min-height: 550px;
 		margin: 54px auto;
 		border: 1px solid $c-01;
+	}
+}
+
+.listView {
+	width: 100%;
+	height: 100%;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.gridView {
+	display: flex;
+	flex-flow: row wrap;
+	max-width: 340px;
+	margin: 0 auto;
+	justify-content: left;
+	padding: 0 10px;
+
+	@include breakpoint($b-01) {
+		max-width: 515px;
+		justify-content: left;
+	}
+
+	@include breakpoint($b-02) {
+		max-width: 725px;
+		justify-content: left;
+	}
+
+	/* @include breakpoint($b-03) {
+		max-width: 1170px;
+	} */
+}
+
+.columnControl {
+	&__col3 {
+		clear: both;
+		padding: 0;
+	}
+	&__item {
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 30px;
+
+		// 768 tablet (show 2 columns)
+		@include breakpoint($b-01) {
+			width: 221px;
+			height: 172px;
+			margin-left: 0;
+			margin-right: 30px;
+
+			&:nth-child(2n) {
+				margin-right: 0;
+			}
+		}
+
+		// 1024 desktop (show 3 columns)
+		@include breakpoint($b-02) {
+			&:nth-child(2n) {
+				margin-right: 30px;
+			}
+
+			&:nth-child(3n) {
+				margin-right: 0;
+			}
+		}
 	}
 }

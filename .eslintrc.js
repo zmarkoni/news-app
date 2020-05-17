@@ -22,4 +22,7 @@ module.exports = {
 		sourceType: 'module',
 	},
 	plugins: ['react', 'react-hooks', 'jsx-a11y'],
+	rules: {
+		'react/prop-types': 0,
+	},
 };
