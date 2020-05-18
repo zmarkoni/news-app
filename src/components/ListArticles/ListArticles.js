@@ -5,7 +5,7 @@ const ListArticles = (props) => {
 	//console.log('ListArticles.js props: ', props);
 	const { articleList } = props;
 
-	console.log('ListArticles.js props: ', articleList);
+	//console.log('ListArticles.js articleList: ', articleList);
 
 	const renderArticle = useMemo(() => {
 		if (articleList && articleList.length) {

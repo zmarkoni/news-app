@@ -3,6 +3,7 @@ import dataFetch from '../store/reducers/dataFetch';
 import { http } from '../shared/utility';
 
 const useDataApi = (initialUrl, httpMethod, initialData) => {
+	//console.log('useDataApi initialUrl: ', initialUrl);
 	const [url, setUrl] = useState(initialUrl);
 	const [method, setMethod] = useState(httpMethod);
 

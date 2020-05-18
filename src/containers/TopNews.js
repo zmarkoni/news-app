@@ -1,30 +1,48 @@
-import React, { useEffect } from 'react';
-import ListArticles from '../components/ListArticles/ListArticles';
-import useDataApi from '../hooks/useDataApi';
+import React, { useEffect, useMemo, useState } from 'react';
+import { config } from '../shared/config';
+import { useSelector, useDispatch } from 'react-redux';
+import { setArticles, setCountry } from '../store/actions/articles';
+//import useDataApi from '../hooks/useDataApi';
 import Loader from '../components/Loader/Loader';
-import { useDispatch } from 'react-redux';
-import { setArticles } from '../store/actions/articles';
+import ListArticles from '../components/ListArticles/ListArticles';
+import { http } from '../shared/utility';
 
 const TopNews = () => {
 	const dispatch = useDispatch();
-	const [{ data, isLoading }] = useDataApi(
-		'https://newsapi.org/v2/top-headlines?country=us&apiKey=999191696e6a4f8dbee0dbcc4a6e8036',
-		'GET',
-		null
-	);
+	const [data, setData] = useState(null);
+	const { apiKey, apiUrl, topHeadlines } = config;
+	const country = useSelector((state) => {
+		//console.log('TopNews articlesStore: ', state.articlesStore);
+		return state.articlesStore.country;
+	});
 
 	useEffect(() => {
+		const url =
+			apiUrl +
+			topHeadlines +
+			`country=${country ? country : 'gb'}&` +
+			apiKey;
+		fetchData(url);
+	}, [country]);
+
+	const fetchData = async (url) => {
+		const result = await http(url, 'GET');
+		setData(result);
+		dispatch(setArticles(result.articles));
+		dispatch(setCountry(country));
+	};
+
+	const renderListArticles = useMemo(() => {
 		if (data) {
-			//console.log('TopNews.js data: ', data); //{status, totalResults, articles} = data;
-			dispatch(setArticles(data.articles));
+			return <ListArticles articleList={data.articles} />;
 		}
-	}, [data, dispatch]);
+	}, [data]);
 
 	return (
 		<section className="topNews">
-			<h1 className="gridView">Top news from country:</h1>
-			{!isLoading && !data && <Loader />}
-			{data && <ListArticles articleList={data.articles} />}
+			<h1 className="gridView">Top news from {country}:</h1>
+			{!data && <Loader />}
+			{renderListArticles}
 		</section>
 	);
 };
