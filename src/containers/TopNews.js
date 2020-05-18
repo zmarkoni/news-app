@@ -22,7 +22,7 @@ const TopNews = () => {
 
 	return (
 		<section className="topNews">
-			<h1>Top news from country:</h1>
+			<h1 className="gridView">Top news from country:</h1>
 			{!isLoading && !data && <Loader />}
 			{data && <ListArticles articleList={data.articles} />}
 		</section>

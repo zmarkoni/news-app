@@ -7,6 +7,14 @@
 		margin: 54px auto;
 		border: 1px solid $c-01;
 	}
+
+	h1 {
+		font-size: 18px;
+		margin-top: 20px;
+		margin-bottom: 30px;
+		display: list-item;
+		list-style-position: inside;
+	}
 }
 
 .listView {
