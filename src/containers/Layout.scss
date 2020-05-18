@@ -1,11 +1,15 @@
 .layout {
 	width: 100%;
+	padding-top: 50px;
 
-	@include breakpoint($b-02) {
-		width: 850px;
+	@include breakpoint($b-01) {
+		padding-top: 0;
 		min-height: 550px;
 		margin: 54px auto;
 		border: 1px solid $c-01;
+	}
+	@include breakpoint($b-02) {
+		width: 850px;
 	}
 
 	h1 {
