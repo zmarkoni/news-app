@@ -24,5 +24,6 @@ module.exports = {
 	plugins: ['react', 'react-hooks', 'jsx-a11y'],
 	rules: {
 		'react/prop-types': 0,
+		'import/prefer-default-export': 'off',
 	},
 };
