@@ -1,1 +1,15 @@
-//@extend
+$moduleName: 'search';
+.#{$moduleName} {
+	&__input {
+		display: block;
+		clear: both;
+		width: 437px;
+		height: 45px;
+		line-height: 45px;
+		padding-left: 30px;
+		font-size: 14px;
+		border: 1px solid #000;
+		background-color: #ddd;
+		margin: 15px auto 50px auto;
+	}
+}

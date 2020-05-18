@@ -4,7 +4,6 @@ import Article from '../Article/Article';
 const ListArticles = (props) => {
 	//console.log('ListArticles.js props: ', props);
 	const { articleList } = props;
-
 	//console.log('ListArticles.js articleList: ', articleList);
 
 	const renderArticle = useMemo(() => {
@@ -14,16 +13,7 @@ const ListArticles = (props) => {
 			articleList.map((article) => {
 				if (article.source.id || article.source.name) {
 					articlesArray.push(
-						<Article
-							article={article}
-							/* key={
-								article.source.id ||
-								article.source.name +
-									'_' +
-									article.source.publishedAt
-							} */
-							key={article.title}
-						/>
+						<Article article={article} key={article.title} />
 					);
 				}
 			});

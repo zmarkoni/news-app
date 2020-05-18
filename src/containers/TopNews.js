@@ -2,19 +2,15 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { config } from '../shared/config';
 import { useSelector, useDispatch } from 'react-redux';
 import { setArticles, setCountry } from '../store/actions/articles';
-//import useDataApi from '../hooks/useDataApi';
+import { http } from '../shared/utility';
 import Loader from '../components/Loader/Loader';
 import ListArticles from '../components/ListArticles/ListArticles';
-import { http } from '../shared/utility';
 
 const TopNews = () => {
 	const dispatch = useDispatch();
 	const [data, setData] = useState(null);
 	const { apiKey, apiUrl, topHeadlines } = config;
-	const country = useSelector((state) => {
-		//console.log('TopNews articlesStore: ', state.articlesStore);
-		return state.articlesStore.country;
-	});
+	const country = useSelector((state) => state.articlesStore.country);
 
 	useEffect(() => {
 		const url =
@@ -40,7 +36,10 @@ const TopNews = () => {
 
 	return (
 		<section className="topNews">
-			<h1 className="gridView">Top news from {country}:</h1>
+			<h1 className="gridView">
+				Top news from{' '}
+				{country === 'gb' ? 'Great Britain' : 'United States'}:
+			</h1>
 			{!data && <Loader />}
 			{renderListArticles}
 		</section>

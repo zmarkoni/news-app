@@ -25,6 +25,7 @@ const Navigation = () => {
 		buttonRefUS.current.classList.remove('button__country--active');
 		event.currentTarget.classList.add('button__country--active');
 		dispatch(setCountry(country));
+		setNavState(!navState);
 	};
 
 	return (
