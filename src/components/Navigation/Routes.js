@@ -23,7 +23,7 @@ const Routes = () => {
 				<Route path="/top-news">
 					<TopNews />
 				</Route>
-				<Route path="/" component={SingleArticle} />
+				<Route path="/article" component={SingleArticle} />
 				<Route path="*">
 					<NoMatch />
 				</Route>

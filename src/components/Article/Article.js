@@ -5,9 +5,10 @@ const Article = (props) => {
 	const { article } = props;
 	const history = useHistory();
 
-	const routeChange = (path) => {
+	const clickHandler = (path) => {
 		//console.log('Article.js path: ', path);
-		history.push(path);
+		let pathTemp = path + article.title.replace(/[\W_]/g, '').toLowerCase();
+		history.push(pathTemp);
 	};
 
 	return (
@@ -23,7 +24,7 @@ const Article = (props) => {
 			<p className="article__description">{article.description}</p>
 			<button
 				className="article__button"
-				onClick={() => routeChange(`/article?id=${article.source.id}`)}
+				onClick={() => clickHandler('/article/:id=')}
 			>
 				More {'>'}
 			</button>

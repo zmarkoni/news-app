@@ -50,10 +50,7 @@ const Navigation = () => {
 						</NavLink>
 					</li>
 					<li>
-						<NavLink
-							className="link link--disabled"
-							to="/singleArticle"
-						>
+						<NavLink className="link link--disabled" to="/article">
 							singleArticle
 						</NavLink>
 					</li>

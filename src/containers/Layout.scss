@@ -4,6 +4,7 @@
 
 	@include breakpoint($b-01) {
 		padding-top: 0;
+		width: 600px;
 		min-height: 550px;
 		margin: 54px auto;
 		border: 1px solid $c-01;
@@ -16,8 +17,9 @@
 		font-size: 18px;
 		margin-top: 20px;
 		margin-bottom: 30px;
-		display: list-item;
-		list-style-position: inside;
+
+		/* display: list-item;
+		list-style-position: inside; */
 	}
 }
 
@@ -40,17 +42,13 @@
 
 	@include breakpoint($b-01) {
 		max-width: 515px;
-		justify-content: left;
+		justify-content: space-around;
 	}
 
 	@include breakpoint($b-02) {
 		max-width: 725px;
 		justify-content: left;
 	}
-
-	/* @include breakpoint($b-03) {
-		max-width: 1170px;
-	} */
 }
 
 .columnControl {
