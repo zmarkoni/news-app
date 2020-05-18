@@ -33,9 +33,9 @@ const ListArticles = (props) => {
 	}, [articleList]);
 
 	return (
-		<div className="listArticles gridView columnControl__col3">
+		<ul className="listArticles gridView columnControl__col3">
 			{renderArticle}
-		</div>
+		</ul>
 	);
 };
 
