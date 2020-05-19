@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'whatwg-fetch';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'; // We use provide to wrap our React APP to connect it with Redux
 import ReduxThunk from 'redux-thunk';

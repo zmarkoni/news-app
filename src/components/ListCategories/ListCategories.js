@@ -1,50 +1,62 @@
-import React, { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { uniqueArray, limitMaxNumberOfElements } from '../../shared/utility';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCountry } from '../../store/actions/articles';
+import { setSourcedArticles } from '../../store/actions/sources';
+import {
+	http,
+	uniqueArray,
+	limitMaxNumberOfElements,
+} from '../../shared/utility';
+import { config } from '../../shared/config';
 import ListArticles from '../ListArticles/ListArticles';
 import ArrowDown from '../../resources/icons/arrow-down.svg';
 //import ArrowUp from '../../resources/icons/arrow-up.svg';
 const ListCategories = (props) => {
 	//console.log('ListCategories.js props: ', props);
 	const { sourcesList } = props;
-	const articles = useSelector((state) => state.articlesStore.articles);
+	const [articlesByCat, setArticlesByCat] = useState([]);
+	const { apiKey, apiUrl, topHeadlines } = config;
+	const dispatch = useDispatch();
+	const country = useSelector((state) => state.articlesStore.country);
+
+	// need fetch for every category
+	useEffect(() => {
+		let categories = uniqueArray(sourcesList, 'category');
+		categories.map((catName) => {
+			let url = (url =
+				apiUrl +
+				topHeadlines +
+				`country=${country}&` +
+				`category=${catName}&` +
+				apiKey);
+			fetchData(url);
+		});
+	}, []);
+
+	const fetchData = async (url) => {
+		const result = await http(url, 'GET');
+		let articles = [...result.articles];
+		setArticlesByCat(articles);
+		console.log('ListCategories.js fetchData:articles => ', articles);
+		dispatch(setSourcedArticles(articles));
+		dispatch(setCountry(country));
+	};
 
 	const renderListCategories = useMemo(() => {
-		if (sourcesList && sourcesList.length) {
+		if (
+			sourcesList &&
+			sourcesList.length &&
+			articlesByCat &&
+			articlesByCat.length
+		) {
 			let categoriesArray = [];
 			let categories = uniqueArray(sourcesList, 'category');
 
 			categories.map((catName, index) => {
-				let categoriesByNameArray = sourcesList.filter(
-					(cat) => cat.category === catName
-				);
-				//console.log('categoriesByNameArray: ', categoriesByNameArray);
-
-				let articlesByCat = [];
-				//newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=999191696e6a4f8dbee0dbcc4a6e8036
-				//newsapi.org/v2/sources?&country=us&category=entertainment&apiKey=999191696e6a4f8dbee0dbcc4a6e8036
-
-				articles.map((article) => {
-					categoriesByNameArray.map((cat) => {
-						/* console.log('cat.name: ', cat.name);
-						console.log(
-							'article.source.name: ',
-							article.source.name
-						); */
-						if (article.source.name === cat.name) {
-							articlesByCat.push(article);
-						}
-					});
-					return articlesByCat;
-				});
-
-				console.log('articlesByCat: ', articlesByCat);
-
 				let limitedArticlesByCat = limitMaxNumberOfElements(
 					articlesByCat,
 					5
 				);
-				console.log('limitedArticlesByCat: ', limitedArticlesByCat);
 				categoriesArray.push(
 					<li className="category__item" key={index}>
 						<div className="category__header">
@@ -62,7 +74,7 @@ const ListCategories = (props) => {
 
 			return categoriesArray;
 		}
-	}, [sourcesList]);
+	}, [articlesByCat]);
 
 	return (
 		<ul className="category__list gridView columnControl__col3">
