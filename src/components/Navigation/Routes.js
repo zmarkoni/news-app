@@ -5,7 +5,7 @@ import TopNews from '../../containers/TopNews';
 import Categories from '../../containers/Categories';
 import Search from '../../containers/Search';
 import NoMatch from '../../components/NoMatch/NoMatch';
-import SingleArticle from '../../components/SingleArticle/SingleArticle';
+import SelectedArticle from '../../components/SelectedArticle/SelectedArticle';
 
 const Routes = () => {
 	return (
@@ -23,7 +23,7 @@ const Routes = () => {
 				<Route path="/top-news">
 					<TopNews />
 				</Route>
-				<Route path="/article" component={SingleArticle} />
+				<Route path="/article" component={SelectedArticle} />
 				<Route path="*">
 					<NoMatch />
 				</Route>

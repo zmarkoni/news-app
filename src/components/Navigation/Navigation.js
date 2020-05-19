@@ -72,7 +72,7 @@ const Navigation = () => {
 					</li>
 					<li>
 						<NavLink className="link link--disabled" to="/article">
-							singleArticle
+							SelectedArticle
 						</NavLink>
 					</li>
 					<li className="button">

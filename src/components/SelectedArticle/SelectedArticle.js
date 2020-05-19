@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 //import { errorHandler } from '../../shared/utility';
 import { useHistory } from 'react-router-dom';
 
-const SingleArticle = () => {
+const SelectedArticle = () => {
 	const history = useHistory();
 	const articleList = useSelector((state) => state.articlesStore.articles);
 	const match = useRouteMatch({
@@ -12,28 +12,30 @@ const SingleArticle = () => {
 		strict: true,
 		sensitive: true,
 	});
-	//console.log('SingleArticle.js match: ', match);
+	//console.log('selectedArticle.js match: ', match);
 
 	const articleTitle = match.params[0];
 	const article = articleList.filter(
 		(a) => a.title.replace(/[\W_]/g, '').toLowerCase() === articleTitle
 	)[0];
 
-	const renderSingleArticle = useMemo(() => {
+	const renderSelectedArticle = useMemo(() => {
 		if (article) {
 			let html = (
-				<div className="singleArticle">
-					<h1 className="singleArticle__title">{article.title}</h1>
-					<div className="singleArticle__imageWrapper">
+				<div className="selectedArticle">
+					<h1 className="selectedArticle__title">{article.title}</h1>
+					<div className="selectedArticle__imageWrapper">
 						<img
-							className="singleArticle__image"
+							className="selectedArticle__image"
 							src={article.urlToImage}
 							alt={article.title}
 						/>
 					</div>
-					<p className="singleArticle__content">{article.content}</p>
+					<p className="selectedArticle__content">
+						{article.content}
+					</p>
 					<button
-						className="singleArticle__button"
+						className="selectedArticle__button"
 						onClick={() => history.goBack()}
 					>
 						{'<'} Back to list
@@ -44,7 +46,7 @@ const SingleArticle = () => {
 		}
 	}, [article, history]);
 
-	return <React.Fragment>{renderSingleArticle}</React.Fragment>;
+	return <React.Fragment>{renderSelectedArticle}</React.Fragment>;
 };
 
-export default SingleArticle;
+export default SelectedArticle;
