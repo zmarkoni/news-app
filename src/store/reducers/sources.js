@@ -1,15 +1,15 @@
-import { FETCH_SOURCES } from '../actions/sources';
+import { SET_SOURCES } from '../actions/sources';
 
 const initialState = {
-	sources: null,
+	sources: [],
 };
 
 const sources = (state = initialState, action) => {
 	switch (action.type) {
-		case FETCH_SOURCES:
+		case SET_SOURCES:
 			return {
 				...state,
-				sources: action.sources,
+				articles: action.data,
 			};
 		default:
 			return state;

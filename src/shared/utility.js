@@ -26,3 +26,7 @@ export const http = (url, method) => {
 			errorHandler(error.message);
 		});
 };
+
+export const limitMaxNumberOfElements = (elements, limit) => {
+	return elements.slice(0, Number(limit));
+};

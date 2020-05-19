@@ -13,19 +13,15 @@ const TopNews = () => {
 	const country = useSelector((state) => state.articlesStore.country);
 
 	useEffect(() => {
-		const url =
-			apiUrl +
-			topHeadlines +
-			`country=${country ? country : 'gb'}&` +
-			apiKey;
+		const url = apiUrl + topHeadlines + `country=${country}&` + apiKey;
 		fetchData(url);
 	}, [country]);
 
 	const fetchData = async (url) => {
 		const result = await http(url, 'GET');
 		setData(result);
-		dispatch(setArticles(result.articles));
-		dispatch(setCountry(country));
+		result.articles && dispatch(setArticles(result.articles));
+		country && dispatch(setCountry(country));
 	};
 
 	const renderListArticles = useMemo(() => {

@@ -1,7 +1,7 @@
 export const config = {
 	apiKey: 'apiKey=999191696e6a4f8dbee0dbcc4a6e8036',
 	apiUrl: 'http://newsapi.org/v2/',
-	sources: 'sources=',
+	sources: 'sources?',
 	topHeadlines: 'top-headlines?',
 	everything: 'everything?',
 };

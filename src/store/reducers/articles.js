@@ -3,7 +3,7 @@ import { SET_COUNTRY } from '../actions/articles';
 
 const initialState = {
 	articles: [],
-	country: '',
+	country: 'gb',
 };
 
 const articles = (state = initialState, action) => {
