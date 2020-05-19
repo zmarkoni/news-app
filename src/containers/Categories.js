@@ -1,10 +1,12 @@
 import React from 'react';
+import AllCategories from '../components/AllCategories/AllCategories';
 
 const Categories = () => {
 	return (
-		<React.Fragment>
-			<div>categories</div>
-		</React.Fragment>
+		<div className="categories gridView">
+			<h1>Top 5 news by categories from GB(country):</h1>
+			<AllCategories />
+		</div>
 	);
 };
 

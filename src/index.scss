@@ -2,10 +2,11 @@
 @import './containers/Layout';
 @import './components/Loader/Loader';
 @import './components/Navigation/Navigation';
-@import './components/ListCategories/ListCategories';
 @import './components/Article/Article';
-@import './components/SingleArticle/SingleArticle';
+@import './components/SelectedArticle/SelectedArticle';
 @import './components/Search/Search';
+@import './components/AllCategories/AllCategories';
+@import './components/SelectedCategorie/SelectedCategorie';
 
 #news {
 	box-sizing: border-box;
