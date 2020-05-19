@@ -13,7 +13,11 @@ const ListArticles = (props) => {
 			articleList.map((article) => {
 				if (article.source.id || article.source.name) {
 					articlesArray.push(
-						<Article article={article} key={article.title} />
+						<Article
+							columnControl={true}
+							article={article}
+							key={article.title}
+						/>
 					);
 				}
 			});

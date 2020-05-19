@@ -18,13 +18,17 @@ $moduleName: 'layout';
 		font-size: 18px;
 		margin-top: 20px;
 		margin-bottom: 30px;
-
+		display: list-item;
+		list-style-position: inside;
+		list-style-type: disc;
 		&.gridView {
 			justify-content: left;
-
-			/* display: list-item;
-			list-style-position: inside; */
 		}
+	}
+
+	h2 {
+		font-size: 16px;
+		text-transform: capitalize;
 	}
 }
 

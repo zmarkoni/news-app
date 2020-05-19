@@ -12,8 +12,17 @@ const Article = (props) => {
 	};
 
 	return (
-		<li className="article columnControl__item">
-			<h2 className="article__title">{article.title}</h2>
+		<li
+			className={`article ${
+				props.swiper === true ? 'swiper-slide' : ''
+			} ${props.columnControl === true ? 'columnControl__item' : ''}`}
+		>
+			{props.heading === 'h3' ? (
+				<h3 className="article__title">{article.title}</h3>
+			) : (
+				<h2 className="article__title">{article.title}</h2>
+			)}
+
 			<div className="article__imageWrapper">
 				<img
 					className="article__image"

@@ -1,10 +1,20 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {
+	useEffect,
+	useState,
+	useMemo,
+	useRef,
+	useLayoutEffect,
+	useCallback,
+} from 'react';
+import Swiper from 'swiper';
 import { useSelector } from 'react-redux';
 import { config } from '../../shared/config';
 //import { setSourcedArticles } from '../../store/actions/sources';
 import { http, limitMaxNumberOfElements } from '../../shared/utility';
 //import Loader from '../components/Loader/Loader';
 import Article from '../Article/Article';
+import ArrowLeft from '../../resources/icons/arrow-left.svg';
+import ArrowRight from '../../resources/icons/arrow-right.svg';
 
 const ListArticles = (props) => {
 	//console.log('ListArticles.js props: ', props);
@@ -14,10 +24,36 @@ const ListArticles = (props) => {
 	const { apiKey, apiUrl, topHeadlines } = config;
 	const country = useSelector((state) => state.articlesStore.country);
 	//const [articlesByCat, setArticlesByCat] = useState([]);
+	let refSwiperContainer = useRef();
 
 	useEffect(() => {
 		fetchData();
 	}, []);
+
+	useLayoutEffect(() => {
+		if (articlesByCatName && articlesByCatName.length) {
+			initSwiperSlider();
+		}
+	}, [articlesByCatName]);
+
+	const initSwiperSlider = useCallback(() => {
+		refSwiperContainer.current = new Swiper(`.swiper-container`, {
+			slidesPerView: 3,
+			spaceBetween: 30,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+		});
+		// init Swiper for multiple components
+		let refSwiperContainerCount = refSwiperContainer.current.length;
+
+		if (!refSwiperContainerCount) {
+			refSwiperContainer.current.init();
+		} else {
+			refSwiperContainer.current[refSwiperContainerCount - 1].init();
+		}
+	}, [articlesByCatName]);
 
 	const fetchData = async () => {
 		const url =
@@ -44,7 +80,13 @@ const ListArticles = (props) => {
 			limitedArticlesByCat.map((article) => {
 				if (article.source.id || article.source.name) {
 					articlesArray.push(
-						<Article article={article} key={article.title} />
+						<Article
+							heading={'h3'}
+							swiper={true}
+							columnControl={false}
+							article={article}
+							key={article.title}
+						/>
 					);
 				}
 			});
@@ -53,7 +95,17 @@ const ListArticles = (props) => {
 		}
 	}, [articlesByCatName]);
 
-	return <React.Fragment>{renderArticle}</React.Fragment>;
+	return (
+		<div className="swiper-container">
+			<div className="swiper-wrapper">{renderArticle}</div>
+			<div className="swiper-button-next">
+				<ArrowRight />
+			</div>
+			<div className="swiper-button-prev">
+				<ArrowLeft />
+			</div>
+		</div>
+	);
 };
 
 export default ListArticles;

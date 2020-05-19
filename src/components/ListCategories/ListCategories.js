@@ -17,7 +17,11 @@ const ListCategories = (props) => {
 				categoriesArray.push(
 					<li className="listCategories__item" key={index}>
 						<div className="listCategories__header">
-							<h2 className="listCategories__title">{catName}</h2>
+							<h2 className="listCategories__title">
+								<button className="listCategories__title--button">
+									{catName}
+								</button>
+							</h2>
 							<button className="listCategories__button">
 								<ArrowDown className="listCategories__arrow listCategories__arrow--up" />
 							</button>
