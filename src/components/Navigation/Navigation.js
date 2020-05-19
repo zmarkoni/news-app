@@ -75,6 +75,11 @@ const Navigation = () => {
 							SelectedArticle
 						</NavLink>
 					</li>
+					<li>
+						<NavLink className="link link--disabled" to="/category">
+							SelectedCategory
+						</NavLink>
+					</li>
 					<li className="button">
 						<button
 							className="button__country"

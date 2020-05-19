@@ -6,6 +6,7 @@ import Categories from '../../containers/Categories';
 import Search from '../../containers/Search';
 import NoMatch from '../../components/NoMatch/NoMatch';
 import SelectedArticle from '../../components/SelectedArticle/SelectedArticle';
+import SelectedCategory from '../../components/SelectedCategory/SelectedCategory';
 
 const Routes = () => {
 	return (
@@ -24,6 +25,7 @@ const Routes = () => {
 					<TopNews />
 				</Route>
 				<Route path="/article" component={SelectedArticle} />
+				<Route path="/category" component={SelectedCategory} />
 				<Route path="*">
 					<NoMatch />
 				</Route>
