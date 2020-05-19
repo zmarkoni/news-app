@@ -3,7 +3,7 @@ import { config } from '../shared/config';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSources } from '../store/actions/sources';
 import { setCountry } from '../store/actions/articles';
-import { http, limitMaxNumberOfElements } from '../shared/utility';
+import { http } from '../shared/utility';
 import Loader from '../components/Loader/Loader';
 import ListCategories from '../components/ListCategories/ListCategories';
 
@@ -20,16 +20,14 @@ const Categories = () => {
 
 	const fetchData = async (url) => {
 		const result = await http(url, 'GET');
-		// max 5
-		let limitedResult = limitMaxNumberOfElements(result.sources, 5);
-		setData(limitedResult);
-		limitedResult && dispatch(setSources(limitedResult));
-		country && dispatch(setCountry(country));
+		setData(result.sources);
+		dispatch(setSources(result.sources));
+		dispatch(setCountry(country));
 	};
 
 	const renderCategoriesList = useMemo(() => {
 		if (data) {
-			return <ListCategories categoriesList={data} />;
+			return <ListCategories sourcesList={data} />;
 		}
 	}, [data]);
 

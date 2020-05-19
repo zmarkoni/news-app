@@ -30,3 +30,7 @@ export const http = (url, method) => {
 export const limitMaxNumberOfElements = (elements, limit) => {
 	return elements.slice(0, Number(limit));
 };
+
+export const uniqueArray = (array, type) => {
+	return [...new Set(array.map((item) => item[type]))];
+};
