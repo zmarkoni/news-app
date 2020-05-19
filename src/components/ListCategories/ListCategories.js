@@ -1,83 +1,40 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setCountry } from '../../store/actions/articles';
-import { setSourcedArticles } from '../../store/actions/sources';
-import {
-	http,
-	uniqueArray,
-	limitMaxNumberOfElements,
-} from '../../shared/utility';
-import { config } from '../../shared/config';
-import ListArticles from '../ListArticles/ListArticles';
+import React, { useMemo } from 'react';
+import { uniqueArray } from '../../shared/utility';
+import ListArticlesByCategory from '../ListArticlesByCategory/ListArticlesByCategory';
 import ArrowDown from '../../resources/icons/arrow-down.svg';
 //import ArrowUp from '../../resources/icons/arrow-up.svg';
+
 const ListCategories = (props) => {
 	//console.log('ListCategories.js props: ', props);
 	const { sourcesList } = props;
-	const [articlesByCat, setArticlesByCat] = useState([]);
-	const { apiKey, apiUrl, topHeadlines } = config;
-	const dispatch = useDispatch();
-	const country = useSelector((state) => state.articlesStore.country);
-
-	// need fetch for every category
-	useEffect(() => {
-		let categories = uniqueArray(sourcesList, 'category');
-		categories.map((catName) => {
-			let url = (url =
-				apiUrl +
-				topHeadlines +
-				`country=${country}&` +
-				`category=${catName}&` +
-				apiKey);
-			fetchData(url);
-		});
-	}, []);
-
-	const fetchData = async (url) => {
-		const result = await http(url, 'GET');
-		let articles = [...result.articles];
-		setArticlesByCat(articles);
-		console.log('ListCategories.js fetchData:articles => ', articles);
-		dispatch(setSourcedArticles(articles));
-		dispatch(setCountry(country));
-	};
 
 	const renderListCategories = useMemo(() => {
-		if (
-			sourcesList &&
-			sourcesList.length &&
-			articlesByCat &&
-			articlesByCat.length
-		) {
+		if (sourcesList && sourcesList.length) {
 			let categoriesArray = [];
 			let categories = uniqueArray(sourcesList, 'category');
 
 			categories.map((catName, index) => {
-				let limitedArticlesByCat = limitMaxNumberOfElements(
-					articlesByCat,
-					5
-				);
 				categoriesArray.push(
-					<li className="category__item" key={index}>
-						<div className="category__header">
-							<h2 className="category__title">{catName}</h2>
-							<button>
-								<ArrowDown className="arrow arrow__up" />
+					<li className="listCategories__item" key={index}>
+						<div className="listCategories__header">
+							<h2 className="listCategories__title">{catName}</h2>
+							<button className="listCategories__button">
+								<ArrowDown className="listCategories__arrow listCategories__arrow--up" />
 							</button>
 						</div>
-						<div className="category__list">
-							<ListArticles articleList={limitedArticlesByCat} />
-						</div>
+						<ul className="listCategories__list">
+							<ListArticlesByCategory catName={catName} />
+						</ul>
 					</li>
 				);
 			});
 
 			return categoriesArray;
 		}
-	}, [articlesByCat]);
+	}, [sourcesList]);
 
 	return (
-		<ul className="category__list gridView columnControl__col3">
+		<ul className="listCategories listView withBoarder">
 			{renderListCategories}
 		</ul>
 	);

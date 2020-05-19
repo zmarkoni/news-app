@@ -33,7 +33,7 @@ const Categories = () => {
 
 	return (
 		<div className="categories">
-			<h1 className="gridView">
+			<h1 className="listView">
 				Top 5 news by categories from {country === 'gb' ? 'GB' : 'US'}:
 			</h1>
 			{!data && <Loader />}

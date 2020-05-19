@@ -22,11 +22,7 @@ const ListArticles = (props) => {
 		}
 	}, [articleList]);
 
-	return (
-		<ul className="listArticles gridView columnControl__col3">
-			{renderArticle}
-		</ul>
-	);
+	return <React.Fragment>{renderArticle}</React.Fragment>;
 };
 
 export default ListArticles;

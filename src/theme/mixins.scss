@@ -13,3 +13,9 @@
 		text-overflow: ellipsis;
 	}
 }
+
+@mixin resetButton {
+	display: block;
+	padding: 0;
+	border: none;
+}

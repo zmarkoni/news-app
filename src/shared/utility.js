@@ -1,3 +1,10 @@
+export const updateObject = (oldObject, updatedProps) => {
+	return {
+		...oldObject,
+		...updatedProps,
+	};
+};
+
 export const errorHandler = (message) => {
 	console.error(
 		'News-app error => ',

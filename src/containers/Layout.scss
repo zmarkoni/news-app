@@ -19,18 +19,28 @@ $moduleName: 'layout';
 		margin-top: 20px;
 		margin-bottom: 30px;
 
-		/* display: list-item;
-		list-style-position: inside; */
+		&.gridView {
+			justify-content: left;
+
+			/* display: list-item;
+			list-style-position: inside; */
+		}
 	}
 }
 
 .listView {
-	width: 100%;
-	height: 100%;
+	width: 94%;
+	margin: 0 3%;
 
 	&::-webkit-scrollbar {
 		display: none;
 	}
+}
+
+.withBoarder {
+	display: block;
+	border: 1px solid #000;
+	border-radius: 15px;
 }
 
 .gridView {

@@ -37,7 +37,9 @@ const TopNews = () => {
 				{country === 'gb' ? 'Great Britain' : 'United States'}:
 			</h1>
 			{!data && <Loader />}
-			{renderListArticles}
+			<ul className="listArticles gridView columnControl__col3">
+				{renderListArticles}
+			</ul>
 		</section>
 	);
 };
