@@ -12,21 +12,23 @@ const Search = () => {
 	const inputRef = useRef();
 
 	useEffect(() => {
-		const url =
-			apiUrl +
-			topHeadlines +
-			`country=${country ? country : 'gb'}&` +
-			`q=${query}&` +
-			apiKey;
+		if (query && query.length) {
+			const url =
+				apiUrl +
+				topHeadlines +
+				`country=${country ? country : 'gb'}&` +
+				`q=${query}&` +
+				apiKey;
 
-		const timer = setTimeout(() => {
-			if (query === inputRef.current.value) {
-				fetchData(url);
-			}
-		}, 500);
-		return () => {
-			clearTimeout(timer);
-		};
+			const timer = setTimeout(() => {
+				if (query === inputRef.current.value) {
+					fetchData(url);
+				}
+			}, 500);
+			return () => {
+				clearTimeout(timer);
+			};
+		}
 	}, [country, query, inputRef]);
 
 	const fetchData = async (url) => {
@@ -34,6 +36,8 @@ const Search = () => {
 		//console.log('Search.js result: ', result.articles);
 		setData(result.articles);
 	};
+
+	//console.log('Search.js hints: ', hints.length);
 
 	return (
 		<section className="search">
@@ -52,7 +56,7 @@ const Search = () => {
 					placeholder="Search term..."
 				/>
 			</div>
-			<ListArticles articleList={hints} />
+			{hints.length > 0 && <ListArticles articleList={hints} />}
 		</section>
 	);
 };
