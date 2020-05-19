@@ -7,6 +7,12 @@ $moduleName: 'listCategories';
 		display: block;
 		width: 100%;
 		overflow: hidden;
+
+		&.hideList {
+			.#{$moduleName}__list {
+				display: none;
+			}
+		}
 	}
 
 	&__header {
@@ -37,7 +43,22 @@ $moduleName: 'listCategories';
 		}
 
 		.#{$moduleName}__arrow {
-			display: block;
+			display: inline-block;
+			border: solid black;
+			border-width: 0 3px 3px 0;
+			padding: 5px;
+			margin-top: 1px;
+			transform: rotate(45deg);
+			-webkit-transform: rotate(45deg);
+		}
+
+		.#{$moduleName}__button.isOpen {
+			margin-bottom: 20px;
+			.#{$moduleName}__arrow {
+				margin-top: 10px;
+				transform: rotate(-135deg);
+				-webkit-transform: rotate(-135deg);
+			}
 		}
 	}
 
