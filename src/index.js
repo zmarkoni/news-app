@@ -5,6 +5,8 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux'; // We use provide to wrap our React APP to connect it with Redux
 import ReduxThunk from 'redux-thunk';
 import { BrowserRouter } from 'react-router-dom';
+import { I18nextProvider } from 'react-i18next';
+import i18n from '../i18n';
 
 import './index.scss';
 import App from './app';
@@ -37,10 +39,12 @@ const store = createStore(
 );
 
 ReactDOM.render(
-	<Provider store={store}>
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-	</Provider>,
+	<I18nextProvider i18n={i18n}>
+		<Provider store={store}>
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		</Provider>
+	</I18nextProvider>,
 	document.getElementById('news')
 );

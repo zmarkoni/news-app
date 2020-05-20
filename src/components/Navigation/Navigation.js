@@ -4,8 +4,9 @@ import BurgerIcon from '../../resources/icons/burger-menu.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTopHeadlinesCountry } from '../../store/actions/topHeadlines';
 import { setSourcesCountry } from '../../store/actions/sources';
-
-const Navigation = () => {
+import { withTranslation } from 'react-i18next';
+const Navigation = (props) => {
+	const { i18n } = props;
 	const [navState, setNavState] = useState(false);
 	const isButtonCountryDisabled = useSelector(
 		(state) => state.topHeadlinesStore.isButtonCountryDisabled
@@ -16,6 +17,7 @@ const Navigation = () => {
 	const dispatch = useDispatch();
 	const buttonRefGB = useRef();
 	const buttonRefUS = useRef();
+	const buttonRefRS = useRef();
 	const clickHandler = () => {
 		setNavState(!navState);
 	};
@@ -24,14 +26,25 @@ const Navigation = () => {
 		//console.log('countryCode: ', countryCode);
 		buttonRefGB.current.classList.remove('button__country--active');
 		buttonRefUS.current.classList.remove('button__country--active');
+		buttonRefRS.current.classList.remove('button__country--active');
 		event.currentTarget.classList.add('button__country--active');
 		setNavState(!navState);
-		dispatch(
-			setTopHeadlinesCountry({
-				country: country,
-			})
-		);
-		dispatch(setSourcesCountry({ country: country }));
+
+		// do not filter Articles by RS language, just switch translation
+		if (country !== 'rs') {
+			dispatch(
+				setTopHeadlinesCountry({
+					country: country,
+				})
+			);
+			dispatch(
+				setSourcesCountry({
+					country: country,
+				})
+			);
+		}
+		let lng = country === 'us' || country === 'gb' ? 'en' : country;
+		i18n.changeLanguage(lng);
 	};
 
 	return (
@@ -89,6 +102,17 @@ const Navigation = () => {
 					<li className="button">
 						<button
 							className="button__country"
+							onClick={(event) =>
+								clickCountryHandler(event, 'rs')
+							}
+							ref={buttonRefRS}
+						>
+							RS
+						</button>
+					</li>
+					<li className="button">
+						<button
+							className="button__country"
 							disabled={isButtonCountryDisabled}
 							onClick={(event) =>
 								clickCountryHandler(event, 'us')
@@ -116,4 +140,4 @@ const Navigation = () => {
 	);
 };
 
-export default Navigation;
+export default withTranslation('translations')(Navigation);

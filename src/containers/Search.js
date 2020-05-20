@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { withTranslation, Trans } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { http } from '../shared/utility';
 import { config } from '../shared/config';
@@ -43,9 +44,9 @@ const Search = () => {
 		<section className="search">
 			<div className="gridView">
 				<h1 className="search__title">
-					Search top news from{' '}
-					{country === 'gb' ? 'Great Britain' : 'United States'} by
-					term:
+					<Trans>Search top news from</Trans>{' '}
+					{country === 'gb' ? 'Great Britain' : 'United States'}{' '}
+					<Trans>by term:</Trans>
 				</h1>
 				<input
 					className="search__input"
@@ -65,4 +66,4 @@ const Search = () => {
 	);
 };
 
-export default Search;
+export default withTranslation('translations')(Search);

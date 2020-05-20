@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { withTranslation } from 'react-i18next';
 import { useRouteMatch } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSourcedArticlesFromCategory } from '../../store/actions/sources';
@@ -7,7 +8,8 @@ import { config } from '../../shared/config';
 import Loader from '../../components/Loader/Loader';
 import ListArticles from '../../components/ListArticles/ListArticles';
 
-const SelectedCategory = () => {
+const SelectedCategory = (props) => {
+	const { t } = props;
 	const dispatch = useDispatch();
 	const [data, setData] = useState(null);
 	const { apiKey, apiUrl, topHeadlines } = config;
@@ -17,6 +19,7 @@ const SelectedCategory = () => {
 		strict: true,
 		sensitive: true,
 	});
+	const category = match.params[0];
 	//console.log('selectedArticle.js match: ', match);
 
 	useEffect(() => {
@@ -24,7 +27,6 @@ const SelectedCategory = () => {
 	}, [country]);
 
 	const fetchData = async () => {
-		const category = match.params[0];
 		const url =
 			apiUrl +
 			topHeadlines +
@@ -52,7 +54,7 @@ const SelectedCategory = () => {
 	return (
 		<div className="SelectedCategory">
 			<h1 className="gridView">
-				Top science(selectedCategory) news from Great Britain(country)
+				{`Top ${category} ${t('news from')} ${country}`}
 			</h1>
 			{!data && <Loader />}
 			<ul className="listArticles gridView columnControl__col3">
@@ -62,4 +64,4 @@ const SelectedCategory = () => {
 	);
 };
 
-export default SelectedCategory;
+export default withTranslation('translations')(SelectedCategory);

@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { withTranslation, Trans } from 'react-i18next';
 import { config } from '../shared/config';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSources } from '../store/actions/sources';
@@ -36,7 +37,8 @@ const Categories = () => {
 	return (
 		<div className="categories">
 			<h1 className="listView">
-				Top 5 news by categories from {country === 'gb' ? 'GB' : 'US'}:
+				<Trans>Top 5 news by categories from </Trans>
+				{country === 'gb' ? 'GB' : 'US'}:
 			</h1>
 			{!data && <Loader />}
 			{renderCategoriesList}
@@ -44,4 +46,4 @@ const Categories = () => {
 	);
 };
 
-export default Categories;
+export default withTranslation('translations')(Categories);

@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { withTranslation, Trans } from 'react-i18next';
 import { config } from '../shared/config';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTopHeadlines } from '../store/actions/topHeadlines';
@@ -39,7 +40,7 @@ const TopNews = () => {
 	return (
 		<section className="topNews">
 			<h1 className="gridView">
-				Top news from{' '}
+				<Trans>Top news from</Trans>{' '}
 				{country === 'gb' ? 'Great Britain' : 'United States'}:
 			</h1>
 			{!data && <Loader />}
@@ -50,4 +51,4 @@ const TopNews = () => {
 	);
 };
 
-export default TopNews;
+export default withTranslation('translations')(TopNews);
