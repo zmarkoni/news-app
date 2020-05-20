@@ -6,7 +6,9 @@ import { useHistory } from 'react-router-dom';
 
 const SelectedArticle = () => {
 	const history = useHistory();
-	const articleList = useSelector((state) => state.articlesStore.articles);
+	const articleList = useSelector(
+		(state) => state.topHeadlinesStore.topHeadlines.articles
+	);
 	const match = useRouteMatch({
 		path: '/article/:id=*',
 		strict: true,
