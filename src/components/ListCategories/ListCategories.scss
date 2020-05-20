@@ -2,6 +2,10 @@ $moduleName: 'listCategories';
 
 .#{$moduleName} {
 	padding: 15px 30px;
+	@media (max-width: $b-01) {
+		max-width: 320px;
+		margin: 0 auto;
+	}
 
 	&__item {
 		display: block;

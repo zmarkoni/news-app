@@ -45,6 +45,10 @@ $moduleName: 'layout';
 	display: block;
 	border: 1px solid #000;
 	border-radius: 15px;
+
+	@media (max-width: $b-01) {
+		border: none;
+	}
 }
 
 .gridView {
@@ -72,15 +76,14 @@ $moduleName: 'layout';
 		padding: 0;
 	}
 	&__item {
-		width: 80%;
 		margin-left: auto;
 		margin-right: auto;
 		margin-bottom: 30px;
+		width: 221px;
+		height: 172px;
 
 		// 768 tablet (show 2 columns)
 		@include breakpoint($b-01) {
-			width: 221px;
-			height: 172px;
 			margin-left: 0;
 			margin-right: 30px;
 

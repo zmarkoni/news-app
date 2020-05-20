@@ -38,11 +38,21 @@ const ListArticles = (props) => {
 
 	const initSwiperSlider = useCallback(() => {
 		refSwiperContainer.current = new Swiper(`.swiper-container`, {
-			slidesPerView: 3,
+			slidesPerView: 1,
 			spaceBetween: 30,
+			slidesOffsetBefore: 0,
+			slidesOffsetAfter: 0,
 			navigation: {
 				nextEl: '.swiper-button-next',
 				prevEl: '.swiper-button-prev',
+			},
+			breakpoints: {
+				640: {
+					slidesPerView: 2,
+				},
+				768: {
+					slidesPerView: 3,
+				},
 			},
 		});
 		// init Swiper for multiple components
