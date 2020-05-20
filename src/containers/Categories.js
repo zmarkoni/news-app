@@ -30,7 +30,9 @@ const Categories = () => {
 
 	const renderCategoriesList = useMemo(() => {
 		if (data) {
-			return <ListCategories sourcesList={data} />;
+			return (
+				<ListCategories from={'sourcedArticles'} sourcesList={data} />
+			);
 		}
 	}, [data]);
 

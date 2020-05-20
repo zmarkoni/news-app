@@ -47,7 +47,12 @@ const SelectedCategory = (props) => {
 
 	const renderListArticles = useMemo(() => {
 		if (data) {
-			return <ListArticles articleList={data.articles} />;
+			return (
+				<ListArticles
+					from={'sourcedArticlesFromCategory'}
+					articleList={data.articles}
+				/>
+			);
 		}
 	}, [data]);
 

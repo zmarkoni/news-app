@@ -2,13 +2,12 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 const Article = (props) => {
-	const { article } = props;
+	const { article, from } = props;
 	const history = useHistory();
 
-	const clickHandler = (path) => {
-		//console.log('Article.js path: ', path);
-		let pathTemp = path + article.title.replace(/[\W_]/g, '').toLowerCase();
-		history.push(pathTemp);
+	const clickHandler = () => {
+		let title = article.title.replace(/[\W_]/g, '').toLowerCase();
+		history.push(`/article?from=${from}&title=${title}`);
 	};
 
 	return (
@@ -31,10 +30,7 @@ const Article = (props) => {
 				/>
 			</div>
 			<p className="article__description">{article.description}</p>
-			<button
-				className="article__button"
-				onClick={() => clickHandler('/article/:id=')}
-			>
+			<button className="article__button" onClick={clickHandler}>
 				More {'>'}
 			</button>
 		</li>

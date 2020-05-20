@@ -18,7 +18,7 @@ import { setSourcedArticles } from '../../store/actions/sources';
 
 const ListArticles = (props) => {
 	//console.log('ListArticles.js props: ', props);
-	const { catName } = props;
+	const { catName, from } = props;
 	const dispatch = useDispatch();
 	const [articlesByCatName, setArticlesByCatName] = useState(null);
 	const { apiKey, apiUrl, topHeadlines } = config;
@@ -94,6 +94,7 @@ const ListArticles = (props) => {
 				if (article.source.id || article.source.name) {
 					articlesArray.push(
 						<Article
+							from={from}
 							heading={'h3'}
 							swiper={true}
 							columnControl={false}

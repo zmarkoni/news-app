@@ -3,7 +3,7 @@ import Article from '../Article/Article';
 
 const ListArticles = (props) => {
 	//console.log('ListArticles.js props: ', props);
-	const { articleList } = props;
+	const { articleList, from } = props;
 	//console.log('ListArticles.js articleList: ', articleList);
 
 	const renderArticle = useMemo(() => {
@@ -14,6 +14,7 @@ const ListArticles = (props) => {
 				if (article.source.id || article.source.name) {
 					articlesArray.push(
 						<Article
+							from={from}
 							columnControl={true}
 							article={article}
 							key={article.title}

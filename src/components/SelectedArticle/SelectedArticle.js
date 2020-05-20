@@ -1,23 +1,39 @@
-import React, { useMemo } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import React, { useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 const SelectedArticle = () => {
 	const history = useHistory();
-	const articlesByCatList = useSelector(
+	const url = new URL(location.href);
+	const articleTitle = url.searchParams.get('title');
+	const from = url.searchParams.get('from');
+	let articlesList = useRef();
+
+	const sourcedArticlesFromCategory = useSelector(
 		(state) => state.sourcesStore.sourcedArticlesFromCategory
 	);
-	const match = useRouteMatch({
-		path: '/article/:id=*',
-		strict: true,
-		sensitive: true,
-	});
-	//console.log('selectedArticle.js match: ', match);
 
-	const articleTitle = match.params[0];
+	const sourcedArticles = useSelector(
+		(state) => state.sourcesStore.sourcedArticles
+	);
 
-	const article = articlesByCatList.filter(
+	const articlesBySearch = useSelector((state) => state.searchStore.articles);
+
+	const articlesByTopHeadlines = useSelector(
+		(state) => state.topHeadlinesStore.articles
+	);
+
+	if (from === 'sourcedArticlesFromCategory') {
+		articlesList.current = sourcedArticlesFromCategory;
+	} else if (from === 'sourcedArticles') {
+		articlesList.current = sourcedArticles;
+	} else if (from === 'articlesByTopHeadlines') {
+		articlesList.current = articlesByTopHeadlines;
+	} else if (from === 'search') {
+		articlesList.current = articlesBySearch;
+	}
+
+	const article = articlesList.current.filter(
 		(a) => a.title.replace(/[\W_]/g, '').toLowerCase() === articleTitle
 	)[0];
 

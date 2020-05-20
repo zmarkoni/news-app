@@ -1,15 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { withTranslation, Trans } from 'react-i18next';
-import { useSelector } from 'react-redux';
+
 import { http } from '../shared/utility';
 import { config } from '../shared/config';
+
+// components
 import ListArticles from '../components/ListArticles/ListArticles';
 
+// redux
+import { useSelector, useDispatch } from 'react-redux';
+import { setSearch } from '../store/actions/search';
+
 const Search = () => {
+	const dispatch = useDispatch();
 	const [hints, setData] = useState('');
 	const [query, setQuery] = useState('');
 	const { apiKey, apiUrl, topHeadlines } = config;
-	const country = useSelector((state) => state.topHeadlinesStore.country);
+	const country = useSelector((state) => state.searchStore.country);
 	const inputRef = useRef();
 
 	useEffect(() => {
@@ -36,6 +43,11 @@ const Search = () => {
 		const result = await http(url, 'GET');
 		//console.log('Search.js result: ', result.articles);
 		setData(result.articles);
+		const payload = {
+			articles: result.articles,
+			country: country,
+		};
+		dispatch(setSearch(payload));
 	};
 
 	//console.log('Search.js hints: ', hints.length);
@@ -59,7 +71,11 @@ const Search = () => {
 			</div>
 			{hints.length > 0 && (
 				<ul className="listArticles gridView columnControl__col3">
-					<ListArticles columnControl={true} articleList={hints} />
+					<ListArticles
+						from={'search'}
+						columnControl={true}
+						articleList={hints}
+					/>
 				</ul>
 			)}
 		</section>

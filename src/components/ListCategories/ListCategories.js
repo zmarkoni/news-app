@@ -5,7 +5,7 @@ import ListArticlesByCategory from '../ListArticlesByCategory/ListArticlesByCate
 
 const ListCategories = (props) => {
 	//console.log('ListCategories.js props: ', props);
-	const { sourcesList } = props;
+	const { sourcesList, from } = props;
 	const history = useHistory();
 
 	const clickedCatTitleHandler = (catName, path) => {
@@ -52,7 +52,10 @@ const ListCategories = (props) => {
 							</button>
 						</div>
 						<ul className="listCategories__list">
-							<ListArticlesByCategory catName={catName} />
+							<ListArticlesByCategory
+								from={from}
+								catName={catName}
+							/>
 						</ul>
 					</li>
 				);

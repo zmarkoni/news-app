@@ -13,10 +13,12 @@ import App from './app';
 
 import topHeadlinesReducer from './store/reducers/topHeadlinesReducer';
 import sourcesReducer from './store/reducers/sourcesReducer';
+import searchReducer from './store/reducers/searchReducer';
 
 const rootReducer = combineReducers({
 	topHeadlinesStore: topHeadlinesReducer,
 	sourcesStore: sourcesReducer,
+	searchStore: searchReducer,
 });
 
 // Create Middleware
