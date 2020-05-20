@@ -2,12 +2,12 @@ import React, { useState, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import BurgerIcon from '../../resources/icons/burger-menu.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCountry } from '../../store/actions/articles';
+import { setTopHeadlinesCountry } from '../../store/actions/topHeadlines';
 
 const Navigation = () => {
 	const [navState, setNavState] = useState(false);
 	const isButtonCountryDisabled = useSelector(
-		(state) => state.articlesStore.isButtonCountryDisabled
+		(state) => state.topHeadlinesStore.isButtonCountryDisabled
 	);
 	/* const isButtonCountryDisabled = useSelector(
 		(state) => state.articlesStore.isButtonCountryDisabled
@@ -24,7 +24,7 @@ const Navigation = () => {
 		buttonRefGB.current.classList.remove('button__country--active');
 		buttonRefUS.current.classList.remove('button__country--active');
 		event.currentTarget.classList.add('button__country--active');
-		dispatch(setCountry(country));
+		dispatch(setTopHeadlinesCountry(country));
 		setNavState(!navState);
 	};
 

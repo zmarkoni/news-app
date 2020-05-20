@@ -8,7 +8,9 @@ const Search = () => {
 	const [hints, setData] = useState('');
 	const [query, setQuery] = useState('');
 	const { apiKey, apiUrl, topHeadlines } = config;
-	const country = useSelector((state) => state.articlesStore.country);
+	const country = useSelector(
+		(state) => state.topHeadlinesStore.topHeadlines.country
+	);
 	const inputRef = useRef();
 
 	useEffect(() => {
@@ -56,7 +58,11 @@ const Search = () => {
 					placeholder="Search term..."
 				/>
 			</div>
-			{hints.length > 0 && <ListArticles articleList={hints} />}
+			{hints.length > 0 && (
+				<ul className="listArticles gridView columnControl__col3">
+					<ListArticles columnControl={true} articleList={hints} />
+				</ul>
+			)}
 		</section>
 	);
 };

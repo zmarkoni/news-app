@@ -4,14 +4,15 @@ import { SET_SOURCED_ARTICLES } from '../actions/sources';
 const initialState = {
 	sources: [],
 	sourcedArticles: [],
+	country: 'gb',
 };
 
-const sources = (state = initialState, action) => {
+const sourcesReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_SOURCES:
 			return {
 				...state,
-				articles: action.data,
+				sources: action.data,
 			};
 		case SET_SOURCED_ARTICLES:
 			return {
@@ -23,4 +24,4 @@ const sources = (state = initialState, action) => {
 	}
 };
 
-export default sources;
+export default sourcesReducer;

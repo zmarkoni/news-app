@@ -9,12 +9,12 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.scss';
 import App from './app';
 
-import articles from './store/reducers/articles';
-import sources from './store/reducers/sources';
+import topHeadlinesReducer from './store/reducers/topHeadlinesReducer';
+import sourcesReducer from './store/reducers/sourcesReducer';
 
 const rootReducer = combineReducers({
-	articlesStore: articles,
-	sourcesStore: sources,
+	topHeadlinesStore: topHeadlinesReducer,
+	sourcesStore: sourcesReducer,
 });
 
 // Create Middleware
