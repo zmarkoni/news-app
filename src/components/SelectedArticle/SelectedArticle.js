@@ -1,13 +1,12 @@
 import React, { useMemo } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-//import { errorHandler } from '../../shared/utility';
 import { useHistory } from 'react-router-dom';
 
 const SelectedArticle = () => {
 	const history = useHistory();
-	const articleList = useSelector(
-		(state) => state.topHeadlinesStore.topHeadlines.articles
+	const articlesByCatList = useSelector(
+		(state) => state.sourcesStore.sourcedArticlesFromCategory
 	);
 	const match = useRouteMatch({
 		path: '/article/:id=*',
@@ -17,7 +16,8 @@ const SelectedArticle = () => {
 	//console.log('selectedArticle.js match: ', match);
 
 	const articleTitle = match.params[0];
-	const article = articleList.filter(
+
+	const article = articlesByCatList.filter(
 		(a) => a.title.replace(/[\W_]/g, '').toLowerCase() === articleTitle
 	)[0];
 

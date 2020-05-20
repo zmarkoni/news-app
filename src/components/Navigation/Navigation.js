@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import BurgerIcon from '../../resources/icons/burger-menu.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTopHeadlinesCountry } from '../../store/actions/topHeadlines';
+import { setSourcesCountry } from '../../store/actions/sources';
 
 const Navigation = () => {
 	const [navState, setNavState] = useState(false);
@@ -24,8 +25,13 @@ const Navigation = () => {
 		buttonRefGB.current.classList.remove('button__country--active');
 		buttonRefUS.current.classList.remove('button__country--active');
 		event.currentTarget.classList.add('button__country--active');
-		dispatch(setTopHeadlinesCountry(country));
 		setNavState(!navState);
+		dispatch(
+			setTopHeadlinesCountry({
+				country: country,
+			})
+		);
+		dispatch(setSourcesCountry({ country: country }));
 	};
 
 	return (

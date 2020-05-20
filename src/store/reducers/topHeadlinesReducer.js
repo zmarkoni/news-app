@@ -5,22 +5,23 @@ import {
 } from '../actions/topHeadlines';
 
 const initialState = {
-	topHeadlines: {
-		articles: [],
-		country: 'gb',
-	},
+	articles: [],
+	country: 'gb',
 };
 
 const setTopHeadlines = (state, action) => {
 	const update = {
-		articles: action.payload.topHeadlines,
+		articles: action.payload.articles,
 		country: action.payload.country,
 	};
-	return updateObject(state, { topHeadlines: update });
+	return updateObject(state, update);
 };
 
-const setCountry = (state, action) => {
-	return updateObject(state, { topHeadlines: { country: action.payload } });
+const setTopHeadlinesCountry = (state, action) => {
+	const update = {
+		country: action.payload.country,
+	};
+	return updateObject(state, update);
 };
 
 const topHeadlinesReducer = (state = initialState, action) => {
@@ -28,7 +29,7 @@ const topHeadlinesReducer = (state = initialState, action) => {
 		case SET_TOP_HEADLINES:
 			return setTopHeadlines(state, action);
 		case SET_TOP_HEADLINES_COUNTRY:
-			return setCountry(state, action);
+			return setTopHeadlinesCountry(state, action);
 	}
 	return state;
 };

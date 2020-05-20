@@ -8,9 +8,7 @@ const Search = () => {
 	const [hints, setData] = useState('');
 	const [query, setQuery] = useState('');
 	const { apiKey, apiUrl, topHeadlines } = config;
-	const country = useSelector(
-		(state) => state.topHeadlinesStore.topHeadlines.country
-	);
+	const country = useSelector((state) => state.topHeadlinesStore.country);
 	const inputRef = useRef();
 
 	useEffect(() => {

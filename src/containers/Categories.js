@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { config } from '../shared/config';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSources } from '../store/actions/sources';
-import { setCountry } from '../store/actions/articles';
 import { http } from '../shared/utility';
 import Loader from '../components/Loader/Loader';
 import ListCategories from '../components/ListCategories/ListCategories';
@@ -11,7 +10,7 @@ const Categories = () => {
 	const dispatch = useDispatch();
 	const [data, setData] = useState(null);
 	const { apiKey, apiUrl, sources } = config;
-	const country = useSelector((state) => state.articlesStore.country);
+	const country = useSelector((state) => state.sourcesStore.country);
 
 	useEffect(() => {
 		const url = apiUrl + sources + `country=${country}&` + apiKey;
@@ -21,8 +20,11 @@ const Categories = () => {
 	const fetchData = async (url) => {
 		const result = await http(url, 'GET');
 		setData(result.sources);
-		dispatch(setSources(result.sources));
-		dispatch(setCountry(country));
+		const payload = {
+			sources: result.sources,
+			country: country,
+		};
+		result.sources && dispatch(setSources(payload));
 	};
 
 	const renderCategoriesList = useMemo(() => {

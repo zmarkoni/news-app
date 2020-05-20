@@ -10,9 +10,10 @@ const TopNews = () => {
 	const dispatch = useDispatch();
 	const [data, setData] = useState(null);
 	const { apiKey, apiUrl, topHeadlines } = config;
-	const country = useSelector(
-		(state) => state.topHeadlinesStore.topHeadlines.country
-	);
+	const country = useSelector((state) => {
+		console.log('TopNews.js state: ', state);
+		return state.topHeadlinesStore.country;
+	});
 
 	useEffect(() => {
 		const url = apiUrl + topHeadlines + `country=${country}&` + apiKey;
@@ -23,7 +24,7 @@ const TopNews = () => {
 		const result = await http(url, 'GET');
 		setData(result);
 		let payload = {
-			topHeadlines: result.articles,
+			articles: result.articles,
 			country: country,
 		};
 		result.articles && dispatch(setTopHeadlines(payload));

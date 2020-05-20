@@ -7,23 +7,22 @@ import React, {
 	useCallback,
 } from 'react';
 import Swiper from 'swiper';
-import { useSelector } from 'react-redux';
 import { config } from '../../shared/config';
-//import { setSourcedArticles } from '../../store/actions/sources';
 import { http, limitMaxNumberOfElements } from '../../shared/utility';
-//import Loader from '../components/Loader/Loader';
+import Loader from '../../components/Loader/Loader';
 import Article from '../Article/Article';
 import ArrowLeft from '../../resources/icons/arrow-left.svg';
 import ArrowRight from '../../resources/icons/arrow-right.svg';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSourcedArticles } from '../../store/actions/sources';
 
 const ListArticles = (props) => {
 	//console.log('ListArticles.js props: ', props);
 	const { catName } = props;
-	//const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	const [articlesByCatName, setArticlesByCatName] = useState(null);
 	const { apiKey, apiUrl, topHeadlines } = config;
-	const country = useSelector((state) => state.articlesStore.country);
-	//const [articlesByCat, setArticlesByCat] = useState([]);
+	const country = useSelector((state) => state.sourcesStore.country);
 	let refSwiperContainer = useRef();
 
 	useEffect(() => {
@@ -75,8 +74,12 @@ const ListArticles = (props) => {
 
 		const result = await http(url, 'GET');
 		setArticlesByCatName(result.articles);
-		/* dispatch(setSources(result.sources));
-		dispatch(setCountry(country)); */
+		const payload = {
+			sourcedArticles: result.articles,
+			country: country,
+			category: catName,
+		};
+		dispatch(setSourcedArticles(payload));
 	};
 
 	const renderArticle = useMemo(() => {
@@ -107,6 +110,7 @@ const ListArticles = (props) => {
 
 	return (
 		<div className="swiper-container">
+			{!articlesByCatName && <Loader />}
 			<div className="swiper-wrapper">{renderArticle}</div>
 			<div className="swiper-button-next">
 				<ArrowRight />

@@ -1,15 +1,17 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSourcedArticlesFromCategory } from '../../store/actions/sources';
 import { http } from '../../shared/utility';
 import { config } from '../../shared/config';
 import Loader from '../../components/Loader/Loader';
 import ListArticles from '../../components/ListArticles/ListArticles';
 
 const SelectedCategory = () => {
+	const dispatch = useDispatch();
 	const [data, setData] = useState(null);
 	const { apiKey, apiUrl, topHeadlines } = config;
-	const country = useSelector((state) => state.articlesStore.country);
+	const country = useSelector((state) => state.sourcesStore.country);
 	const match = useRouteMatch({
 		path: '/category/:id=*',
 		strict: true,
@@ -22,17 +24,23 @@ const SelectedCategory = () => {
 	}, [country]);
 
 	const fetchData = async () => {
+		const category = match.params[0];
 		const url =
 			apiUrl +
 			topHeadlines +
-			`category=${match.params[0]}&` +
+			`category=${category}&` +
 			`country=${country}&` +
 			apiKey;
 
 		const result = await http(url, 'GET');
 		setData(result);
-		/* dispatch(setSources(result.sources));
-		dispatch(setCountry(country)); */
+		const payload = {
+			sourcedArticlesFromCategory: result.articles,
+			category: category,
+			country: country,
+		};
+
+		dispatch(setSourcedArticlesFromCategory(payload));
 	};
 
 	const renderListArticles = useMemo(() => {
