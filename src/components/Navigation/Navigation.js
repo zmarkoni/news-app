@@ -4,6 +4,7 @@ import BurgerIcon from '../../resources/icons/burger-menu.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTopHeadlinesCountry } from '../../store/actions/topHeadlines';
 import { setSourcesCountry } from '../../store/actions/sources';
+import { setSearchCountry } from '../../store/actions/search';
 import { withTranslation } from 'react-i18next';
 const Navigation = (props) => {
 	const { i18n } = props;
@@ -39,6 +40,11 @@ const Navigation = (props) => {
 			);
 			dispatch(
 				setSourcesCountry({
+					country: country,
+				})
+			);
+			dispatch(
+				setSearchCountry({
 					country: country,
 				})
 			);
