@@ -1,4 +1,4 @@
-$moduleName: 'selectedArticle';
+$moduleName: "selectedArticle";
 .#{$moduleName} {
 	display: block;
 	position: relative;
@@ -19,21 +19,18 @@ $moduleName: 'selectedArticle';
 		background-color: $c-02;
 
 		// IE11 fix
-		@media screen and (-ms-high-contrast: active),
-			screen and (-ms-high-contrast: none) {
+		@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
 			display: block;
 		}
 
 		.#{$moduleName}__image {
 			display: block;
-			height: 75px;
 			object-fit: cover;
 			width: 100%;
 			margin: auto;
 
 			// IE11 fix
-			@media screen and (-ms-high-contrast: active),
-				screen and (-ms-high-contrast: none) {
+			@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
 				display: block;
 				max-width: 100%;
 				max-height: 90%;
