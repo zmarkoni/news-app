@@ -17,6 +17,9 @@ module.exports = {
 			'Access-Control-Allow-Origin': '*',
 			'Access-Control-Allow-Headers': '*',
 		},
+		historyApiFallback: true,
+		contentBase: './',
+		hot: true,
 	},
 	module: {
 		rules: [

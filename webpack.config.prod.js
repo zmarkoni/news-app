@@ -8,16 +8,18 @@ module.exports = {
 	entry: './src/index.js',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'news-app-prod-bundle.js',
+		filename: 'bundle.js',
 		publicPath: '',
 	},
 	devtool: 'none',
 	devServer: {
-		contentBase: './dist',
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 			'Access-Control-Allow-Headers': '*',
 		},
+		historyApiFallback: true,
+		contentBase: './',
+		hot: true,
 	},
 	module: {
 		rules: [

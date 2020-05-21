@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from './components/Navigation/Navigation';
 import Routes from './components/Navigation/Routes';
+import { HashRouter } from 'react-router-dom';
 //import { useErrorBoundary } from '..//node_modules/use-error-boundary/lib/use-error-boundary';
 const App = () => {
 	//console.log('App.js props: ', props);
@@ -9,14 +10,14 @@ const App = () => {
 	} = useErrorBoundary(); */
 
 	return (
-		<React.Fragment>
+		<HashRouter>
 			<div className="layout">
 				<Navigation />
 				<main role="main" className="main">
 					<Routes />
 				</main>
 			</div>
-		</React.Fragment>
+		</HashRouter>
 	);
 };
 
