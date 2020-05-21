@@ -4,7 +4,8 @@
 	"description": "test-zoran-markovic",
 	"main": "index.js",
 	"scripts": {
-		"start": "webpack-dev-server"
+		"start": "webpack-dev-server",
+		"build:prod": "webpack --config webpack.config.prod.js"
 	},
 	"repository": {
 		"type": "git",
