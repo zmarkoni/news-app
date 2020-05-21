@@ -73,13 +73,17 @@ const ListArticles = (props) => {
 			apiKey;
 
 		const result = await http(url, 'GET');
-		setArticlesByCatName(result.articles);
+		console.log('result: ', result);
 		const payload = {
-			sourcedArticles: result.articles,
-			country: country,
-			category: catName,
+			[catName]: {
+				articles: result.articles,
+				country: country,
+				category: catName,
+			},
 		};
+		console.log('dispatch');
 		dispatch(setSourcedArticles(payload));
+		setArticlesByCatName(result.articles);
 	};
 
 	const renderArticle = useMemo(() => {
@@ -94,6 +98,7 @@ const ListArticles = (props) => {
 				if (article.source.id || article.source.name) {
 					articlesArray.push(
 						<Article
+							catName={catName}
 							from={from}
 							heading={'h3'}
 							swiper={true}

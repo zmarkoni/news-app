@@ -12,6 +12,12 @@ module.exports = {
 		publicPath: '',
 	},
 	devtool: 'cheap-module-eval-source-map',
+	devServer: {
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Headers': '*',
+		},
+	},
 	module: {
 		rules: [
 			{
@@ -74,4 +80,10 @@ module.exports = {
 			files: '**/*.(sa|sc|c)ss',
 		}),
 	],
+	devServer: {
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+			https: true,
+		},
+	},
 };

@@ -7,6 +7,7 @@ const SelectedArticle = () => {
 	const url = new URL(location.href);
 	const articleTitle = url.searchParams.get('title');
 	const from = url.searchParams.get('from');
+	const catName = url.searchParams.get('category');
 	let articlesList = useRef();
 
 	const sourcedArticlesFromCategory = useSelector(
@@ -14,7 +15,7 @@ const SelectedArticle = () => {
 	);
 
 	const sourcedArticles = useSelector(
-		(state) => state.sourcesStore.sourcedArticles
+		(state) => state.sourcesStore.sourcedArticlesFromCategory
 	);
 
 	const articlesBySearch = useSelector((state) => state.searchStore.articles);
@@ -26,7 +27,10 @@ const SelectedArticle = () => {
 	if (from === 'sourcedArticlesFromCategory') {
 		articlesList.current = sourcedArticlesFromCategory;
 	} else if (from === 'sourcedArticles') {
-		articlesList.current = sourcedArticles;
+		let articlesTmp = sourcedArticles.filter(
+			(el) => Object.keys(el)[0] === catName
+		);
+		articlesList.current = articlesTmp[0][catName].articles;
 	} else if (from === 'articlesByTopHeadlines') {
 		articlesList.current = articlesByTopHeadlines;
 	} else if (from === 'search') {

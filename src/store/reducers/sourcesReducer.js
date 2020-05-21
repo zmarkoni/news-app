@@ -25,12 +25,8 @@ const setSourcedArticlesFromCategory = (state, action) => {
 };
 
 const setSourcedArticles = (state, action) => {
-	const update = {
-		sourcedArticles: action.payload.sourcedArticles,
-		country: action.payload.country,
-		category: action.payload.category,
-	};
-	return updateObject(state, update);
+	const temp = state.sourcedArticlesFromCategory.push(action.payload);
+	return updateObject(state, temp);
 };
 
 const setSources = (state, action) => {

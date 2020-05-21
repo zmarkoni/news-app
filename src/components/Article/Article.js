@@ -2,12 +2,14 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 const Article = (props) => {
-	const { article, from } = props;
+	const { article, from, catName } = props;
 	const history = useHistory();
 
 	const clickHandler = () => {
 		let title = article.title.replace(/[\W_]/g, '').toLowerCase();
-		history.push(`/article?from=${from}&title=${title}`);
+		history.push(
+			`/article?from=${from}&category=${catName}&title=${title}`
+		);
 	};
 
 	return (

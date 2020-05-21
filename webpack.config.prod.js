@@ -12,6 +12,13 @@ module.exports = {
 		publicPath: '',
 	},
 	devtool: 'none',
+	devServer: {
+		contentBase: './dist',
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Headers': '*',
+		},
+	},
 	module: {
 		rules: [
 			{
