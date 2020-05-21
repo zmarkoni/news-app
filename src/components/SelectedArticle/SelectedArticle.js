@@ -4,7 +4,8 @@ import { useHistory } from 'react-router-dom';
 
 const SelectedArticle = () => {
 	const history = useHistory();
-	const url = new URL(location.href);
+	let href = window.location.href.replace('/#', '');
+	let url = new URL(href);
 	const articleTitle = url.searchParams.get('title');
 	const from = url.searchParams.get('from');
 	const catName = url.searchParams.get('category');
