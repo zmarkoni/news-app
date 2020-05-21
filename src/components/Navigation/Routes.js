@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import TopNews from '../../containers/TopNews';
 import Categories from '../../containers/Categories';
@@ -13,22 +13,15 @@ const Routes = () => {
 		<React.Fragment>
 			<Switch>
 				<Route exact path="/">
-					<TopNews />
+					<Redirect to="/topNews" />
 				</Route>
-				<Route path="/categories">
-					<Categories />
-				</Route>
-				<Route path="/search">
-					<Search />
-				</Route>
-				<Route path="/top-news">
-					<TopNews />
-				</Route>
+				<Route exact path="/topNews" component={TopNews} />
+				<Route path="/categories" component={Categories} />
+				<Route path="/search" component={Search} />
 				<Route path="/article" component={SelectedArticle} />
 				<Route path="/category" component={SelectedCategory} />
-				<Route path="*">
-					<NoMatch />
-				</Route>
+				<Route component={NoMatch} />
+				{/* <Redirect from="/article" to="/selectedArticle" /> */}
 			</Switch>
 		</React.Fragment>
 	);

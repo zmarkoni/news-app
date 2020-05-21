@@ -63,7 +63,7 @@ const Navigation = (props) => {
 							exact={true}
 							className="link"
 							activeClassName="is-active"
-							to="/"
+							to="/topNews"
 							onClick={clickHandler}
 						>
 							Top News
