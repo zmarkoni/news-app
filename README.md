@@ -20,7 +20,7 @@ A ReactJS APP which consumes the NEWS API https://newsapi.org/ and show top News
 4. **React.js to render frond-end**.
 5. **Redux for centralized state management**.
 6. **SASS for styling**.
-7. **i18n**.
+7. **i18n**. RS language is added just to show translations
 8. **a11y**.
 9. **Readme.md**.
 10. **Production ready => dist folder**.
