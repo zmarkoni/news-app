@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { uniqueArray } from '../../shared/utility';
 import ListArticlesByCategory from '../ListArticlesByCategory/ListArticlesByCategory';
@@ -8,10 +8,13 @@ const ListCategories = (props) => {
 	const { sourcesList, from } = props;
 	const history = useHistory();
 
-	const clickedCatTitleHandler = (catName, path) => {
-		let pathTemp = path + catName.replace(/[\W_]/g, '').toLowerCase();
-		history.push(pathTemp);
-	};
+	const clickedCatTitleHandler = useCallback(
+		(catName, path) => {
+			let pathTemp = path + catName.replace(/[\W_]/g, '').toLowerCase();
+			history.push(pathTemp);
+		},
+		[history]
+	);
 
 	const clickedArrowHandler = (event) => {
 		event.preventDefault();
@@ -63,7 +66,7 @@ const ListCategories = (props) => {
 
 			return categoriesArray;
 		}
-	}, []);
+	}, [clickedCatTitleHandler, from, sourcesList]);
 
 	return (
 		<ul className="listCategories listView withBoarder">

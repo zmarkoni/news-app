@@ -14,19 +14,20 @@ const Categories = () => {
 	const country = useSelector((state) => state.sourcesStore.country);
 
 	useEffect(() => {
-		const url = apiUrl + sources + `country=${country}&` + apiKey;
-		fetchData(url);
-	}, [country]);
-
-	const fetchData = async (url) => {
-		const result = await http(url, 'GET');
-		setData(result.sources);
-		const payload = {
-			sources: result.sources,
-			country: country,
-		};
-		result.sources && dispatch(setSources(payload));
-	};
+		if (country) {
+			const fetchData = async () => {
+				const url = apiUrl + sources + `country=${country}&` + apiKey;
+				const result = await http(url, 'GET');
+				setData(result.sources);
+				const payload = {
+					sources: result.sources,
+					country: country,
+				};
+				result.sources && dispatch(setSources(payload));
+			};
+			fetchData();
+		}
+	}, [country, apiKey, apiUrl, sources, dispatch]);
 
 	const renderCategoriesList = useMemo(() => {
 		if (data) {

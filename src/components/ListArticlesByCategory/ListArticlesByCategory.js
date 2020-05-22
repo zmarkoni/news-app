@@ -4,7 +4,6 @@ import React, {
 	useMemo,
 	useRef,
 	useLayoutEffect,
-	useCallback,
 } from 'react';
 import Swiper from 'swiper';
 import { config } from '../../shared/config';
@@ -26,8 +25,28 @@ const ListArticles = (props) => {
 	let refSwiperContainer = useRef();
 
 	useEffect(() => {
+		const fetchData = async () => {
+			const url =
+				apiUrl +
+				topHeadlines +
+				`category=${catName}&` +
+				`country=${country}&` +
+				apiKey;
+
+			const result = await http(url, 'GET');
+			console.log('result: ', result);
+			const payload = {
+				[catName]: {
+					articles: result.articles,
+					country: country,
+					category: catName,
+				},
+			};
+			dispatch(setSourcedArticles(payload));
+			setArticlesByCatName(result.articles);
+		};
 		fetchData();
-	}, []);
+	}, [apiKey, apiUrl, catName, country, dispatch, topHeadlines]);
 
 	useLayoutEffect(() => {
 		if (articlesByCatName && articlesByCatName.length) {
@@ -35,7 +54,7 @@ const ListArticles = (props) => {
 		}
 	}, [articlesByCatName]);
 
-	const initSwiperSlider = useCallback(() => {
+	const initSwiperSlider = () => {
 		refSwiperContainer.current = new Swiper(`.swiper-container`, {
 			slidesPerView: 1,
 			spaceBetween: 30,
@@ -62,28 +81,6 @@ const ListArticles = (props) => {
 		} else {
 			refSwiperContainer.current[refSwiperContainerCount - 1].init();
 		}
-	}, [articlesByCatName]);
-
-	const fetchData = async () => {
-		const url =
-			apiUrl +
-			topHeadlines +
-			`category=${catName}&` +
-			`country=${country}&` +
-			apiKey;
-
-		const result = await http(url, 'GET');
-		console.log('result: ', result);
-		const payload = {
-			[catName]: {
-				articles: result.articles,
-				country: country,
-				category: catName,
-			},
-		};
-		console.log('dispatch');
-		dispatch(setSourcedArticles(payload));
-		setArticlesByCatName(result.articles);
 	};
 
 	const renderArticle = useMemo(() => {
@@ -112,7 +109,7 @@ const ListArticles = (props) => {
 
 			return articlesArray;
 		}
-	}, [articlesByCatName]);
+	}, [articlesByCatName, catName, from]);
 
 	return (
 		<div className="swiper-container">

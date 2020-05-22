@@ -23,27 +23,28 @@ const SelectedCategory = (props) => {
 	//console.log('selectedArticle.js match: ', match);
 
 	useEffect(() => {
-		fetchData();
-	}, [country]);
+		if (country) {
+			const fetchData = async () => {
+				const url =
+					apiUrl +
+					topHeadlines +
+					`category=${category}&` +
+					`country=${country}&` +
+					apiKey;
 
-	const fetchData = async () => {
-		const url =
-			apiUrl +
-			topHeadlines +
-			`category=${category}&` +
-			`country=${country}&` +
-			apiKey;
+				const result = await http(url, 'GET');
+				setData(result);
+				const payload = {
+					sourcedArticlesFromCategory: result.articles,
+					category: category,
+					country: country,
+				};
 
-		const result = await http(url, 'GET');
-		setData(result);
-		const payload = {
-			sourcedArticlesFromCategory: result.articles,
-			category: category,
-			country: country,
-		};
-
-		dispatch(setSourcedArticlesFromCategory(payload));
-	};
+				dispatch(setSourcedArticlesFromCategory(payload));
+			};
+			fetchData();
+		}
+	}, [country, apiKey, apiUrl, category, dispatch, topHeadlines]);
 
 	const renderListArticles = useMemo(() => {
 		if (data) {

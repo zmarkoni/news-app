@@ -21,34 +21,32 @@ const Search = () => {
 
 	useEffect(() => {
 		if (query && query.length) {
-			const url =
-				apiUrl +
-				topHeadlines +
-				`country=${country ? country : 'gb'}&` +
-				`q=${query}&` +
-				apiKey;
-
 			const timer = setTimeout(() => {
 				if (query === inputRef.current.value) {
-					fetchData(url);
+					const fetchData = async (country, query) => {
+						const url =
+							apiUrl +
+							topHeadlines +
+							`country=${country ? country : 'gb'}&` +
+							`q=${query}&` +
+							apiKey;
+						const result = await http(url, 'GET');
+						//console.log('Search.js result: ', result.articles);
+						setData(result.articles);
+						const payload = {
+							articles: result.articles,
+							country: country,
+						};
+						dispatch(setSearch(payload));
+					};
+					fetchData(country, query);
 				}
 			}, 500);
 			return () => {
 				clearTimeout(timer);
 			};
 		}
-	}, [country, query, inputRef]);
-
-	const fetchData = async (url) => {
-		const result = await http(url, 'GET');
-		//console.log('Search.js result: ', result.articles);
-		setData(result.articles);
-		const payload = {
-			articles: result.articles,
-			country: country,
-		};
-		dispatch(setSearch(payload));
-	};
+	}, [country, query, inputRef, apiKey, apiUrl, dispatch, topHeadlines]);
 
 	//console.log('Search.js hints: ', hints.length);
 

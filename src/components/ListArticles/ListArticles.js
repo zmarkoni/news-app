@@ -25,7 +25,7 @@ const ListArticles = (props) => {
 
 			return articlesArray;
 		}
-	}, [articleList]);
+	}, [articleList, from]);
 
 	return <React.Fragment>{renderArticle}</React.Fragment>;
 };

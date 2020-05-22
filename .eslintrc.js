@@ -5,7 +5,6 @@ module.exports = {
 	},
 	extends: [
 		'eslint:recommended',
-		'plugin:react-hooks/recommended',
 		'plugin:react/recommended',
 		'plugin:prettier/recommended',
 		'plugin:jsx-a11y/recommended',
@@ -25,5 +24,7 @@ module.exports = {
 	rules: {
 		'react/prop-types': 0,
 		'import/prefer-default-export': 'off',
+		'react-hooks/rules-of-hooks': 'error',
+		'react-hooks/exhaustive-deps': 'warn',
 	},
 };

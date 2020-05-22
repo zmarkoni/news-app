@@ -23,19 +23,18 @@ const TopNews = () => {
 	const { apiKey, apiUrl, topHeadlines } = config;
 
 	useEffect(() => {
-		const url = apiUrl + topHeadlines + `country=${country}&` + apiKey;
-		fetchData(url);
-	}, [country]);
-
-	const fetchData = async (url) => {
-		const result = await http(url, 'GET');
-		setData(result);
-		let payload = {
-			articles: result.articles,
-			country: country,
+		const fetchData = async () => {
+			const url = apiUrl + topHeadlines + `country=${country}&` + apiKey;
+			const result = await http(url, 'GET');
+			setData(result);
+			let payload = {
+				articles: result.articles,
+				country: country,
+			};
+			result.articles && dispatch(setTopHeadlines(payload));
 		};
-		result.articles && dispatch(setTopHeadlines(payload));
-	};
+		fetchData();
+	}, [country, apiKey, apiUrl, dispatch, topHeadlines]);
 
 	const renderListArticles = useMemo(() => {
 		if (data) {
