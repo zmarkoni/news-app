@@ -33,4 +33,4 @@ A ReactJS APP which consumes the NEWS API https://newsapi.org/ and show top News
 4. **Install dependencies**. `npm install`
 5. **Run the project**. `npm run start`
 6. **Preview project in:**. `http://localhost:8080/`
-7. **Create production fils**. `npm run build:prod`
+7. **Create production fils**. `npm run build:prod`, New Production files can be found in Dist folder.
