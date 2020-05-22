@@ -29,7 +29,8 @@ A ReactJS APP which consumes the NEWS API https://newsapi.org/ and show top News
 
 1. **Required node v12.0.0, npm v6.9.0**.
 2. **Clone the project**. `git clone https://github.com/zmarkoni/news-app.git`.
-3. **Install dependencies**. `npm install`
-4. **Run the project**. `npm run start`
-5. **Preview project in:**. `http://localhost:8080/`
-6. **Create production fils**. `npm run build:prod`
+3. **Go to news-app folder**. `cd news-app`
+4. **Install dependencies**. `npm install`
+5. **Run the project**. `npm run start`
+6. **Preview project in:**. `http://localhost:8080/`
+7. **Create production fils**. `npm run build:prod`
